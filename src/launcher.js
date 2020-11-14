@@ -3,6 +3,31 @@ class WLauncher {
     this.appName = 'WLauncher';
     this.view = null;
     this.keyList = [];
+    this.properties = {
+      appendChild: false,
+      visibility: {
+        value: false,
+        func: () => this.handleVisibility(),
+      },
+    };
+
+    this.propertiesProxy = new Proxy(this.properties, {
+      set: (target, key, value) => {
+        const obj = target;
+        obj[key] = {
+          ...obj[key],
+          ...value,
+        };
+
+        obj[key].func();
+
+        return true;
+      },
+    });
+  }
+
+  handleVisibility() {
+    this.appendView();
   }
 
   fetchKey() {
@@ -13,13 +38,22 @@ class WLauncher {
 
   checkKeyList() {
     document.addEventListener('keyup', () => {
-      console.log('this.keyList', this.keyList);
       if (
         this.keyList[0] === 'Control'
         && this.keyList[1] === 'Shift'
         && this.keyList[2] === 'L'
+        && !this.properties.appendChild
       ) {
-        console.log('pressed');
+        this.propertiesProxy.visibility = { value: true };
+      }
+
+      if (
+        this.keyList[0] === 'Control'
+        && this.keyList[1] === 'Shift'
+        && this.keyList[2] !== 'L'
+      ) {
+        this.keyList.length = 2;
+        return;
       }
 
       this.keyList.length = 0;
@@ -37,15 +71,21 @@ class WLauncher {
     this.createApp();
   }
 
+  clearView() {
+    document.body.querySelector(this.appName).remove();
+  }
+
   appendView() {
+    if (this.properties.appendChild) return;
+
     document.body.appendChild(this.view);
+    this.properties.appendChild = true;
   }
 
   init() {
     this.fetchKey();
     this.checkKeyList();
     this.createView();
-    this.appendView();
   }
 }
 
