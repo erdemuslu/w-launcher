@@ -1,3 +1,5 @@
+import { updateCssVariable } from './helpers';
+
 class WLauncher {
   constructor() {
     this.appName = 'WLauncher';
@@ -62,7 +64,7 @@ class WLauncher {
 
   createApp() {
     const app = document.createElement('div');
-    app.setAttribute('class', this.appName);
+    app.setAttribute('class', this.appName.toLocaleLowerCase());
     app.innerText = 'App rendered';
     this.view = app;
   }
@@ -82,7 +84,10 @@ class WLauncher {
     this.properties.appendChild = true;
   }
 
-  init() {
+  init({
+    zIndex = 2,
+  }) {
+    updateCssVariable({ target: '--wlauncher-z-index', value: `${zIndex}` });
     this.fetchKey();
     this.checkKeyList();
     this.createView();
