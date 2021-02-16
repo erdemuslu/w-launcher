@@ -4,10 +4,10 @@
   "description": "Make your website accessible",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf .cache dist",
-    "start": "parcel src/launcher.js src/style/main.scss",
-    "build": "yarn clean && parcel build src/launcher.js",
-    "start:example": "cd example && yarn start"
+    "clean": "rm -rf .cache dist example/.cache example/dist",
+    "start": "parcel watch index.ts",
+    "build": "yarn clean && parcel build index.ts --no-source-maps",
+    "start:example": "cd example && parcel index.html"
   },
   "repository": {
     "type": "git",
@@ -21,12 +21,11 @@
   },
   "homepage": "https://github.com/erdemuslu/w-launcher#readme",
   "devDependencies": {
-    "eslint": "^7.13.0",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
+    "eslint": "^7.20.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "sass": "^1.29.0"
-  },
-  "dependencies": {
-    "parcel-bundler": "^1.12.4"
+    "typescript": "^4.1.5"
   }
 }
