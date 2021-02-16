@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf .cache dist example/.cache example/dist",
-    "start": "parcel watch index.ts",
-    "build": "yarn clean && parcel build index.ts --no-source-maps",
-    "start:example": "cd example && parcel index.html"
+    "start": "parcel watch src/index.ts",
+    "build": "yarn clean && parcel build src/index.ts --no-source-maps",
+    "start:example": "cd example && parcel index.html",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -21,11 +22,16 @@
   },
   "homepage": "https://github.com/erdemuslu/w-launcher#readme",
   "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.28",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
     "eslint": "^7.20.0",
     "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.1",
     "typescript": "^4.1.5"
   }
 }

@@ -1,5 +1,5 @@
 import {
-  createElement
+  createElement,
 } from './utils';
 
 class WLauncher {
@@ -11,7 +11,7 @@ class WLauncher {
 
   render() {
     const wrapper = createElement({ type: 'div' });
-    console.log('hello TS', wrapper );
+    console.log('wrapper', wrapper, this.root);
   }
 }
 

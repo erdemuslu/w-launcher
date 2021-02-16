@@ -15,4 +15,4 @@ export const createElement = ({
   return el;
 };
 
-export const test = () => 'Test';
+export const sum = (a: number, b: number): number => a + b;
